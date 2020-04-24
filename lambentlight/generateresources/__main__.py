@@ -60,6 +60,7 @@ def main():
     with open("resources.json", "w") as file:
         json.dump({"$schema": SCHEMA_BASIC, "resources": resources}, file, indent=4)
         file.write("\n")
+    print(f"{Fore.LIGHTGREEN_EX}Generation of Resource List complete!")
 
 
 if __name__ == '__main__':

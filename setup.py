@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 with open("requirements.txt") as file:
@@ -20,7 +20,7 @@ setup(
     long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/LambentLight/Toolkit",
-    packages=["lambentlight"],
+    packages=find_packages(),
     install_requires=reqs,
     extras_require={
         "dev": dev_reqs

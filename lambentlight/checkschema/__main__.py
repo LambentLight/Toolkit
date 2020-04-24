@@ -6,6 +6,8 @@ import requests
 from colorama import init, Fore
 from jsonschema import validate, ValidationError
 
+from lambentlight.schema import is_schema_valid
+
 
 def main():
     """
@@ -53,17 +55,9 @@ def main():
         print(f"{Fore.LIGHTRED_EX}The {Fore.WHITE}JSON Schema {Fore.LIGHTRED_EX}is not valid JSON!")
         sys.exit(15)
 
-    # With the JSON parsed, validate the schema
-    try:
-        validate(origin, schema)
-    except ValidationError as e:
-        path = " > ".join(str(x) for x in e.path)
-        print(f"{Fore.CYAN}The File {Fore.WHITE}{name} {Fore.CYAN}does not complies with "
-              f"the {Fore.WHITE}JSON Schema{Fore.CYAN}:")
-        print(f"\t{Fore.WHITE}{e.message} on {path}")
+    # With the JSON parsed, validate the schema and exit if is not
+    if not is_schema_valid(origin, schema, name):
         sys.exit(16)
-    else:
-        print(f"{Fore.LIGHTGREEN_EX}The File {Fore.WHITE}{name} {Fore.LIGHTGREEN_EX}complies with the Schema!")
 
 
 if __name__ == '__main__':
